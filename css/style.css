@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Design tokens - copied as-is from docs/design-tokens-merhav.md
+   ========================================================================== */
+:root {
+  /* Kit colors - Neutral */
+  --color-white: #FFFFFF;
+  --color-broken-white: #E0DFDF;
+  --color-black: #000000;
+
+  /* Kit colors - Call to Action */
+  --color-blue-sea: #0163FD;
+  --color-blue-sky: #CCE0FF;
+  --color-dark-yellow: #FDB61E;
+
+  /* Kit colors - Secondary */
+  --color-yellow-med: #FCB923;
+  --color-yellow-sun: #FFCF3C;
+  --color-sage-green: #81A26B;
+  --color-red-lips: #E83E2D;
+  --color-ice-blue: #80CAE3;
+
+  /* Role colors - use these in components */
+  --color-primary: var(--color-blue-sea);        /* buttons, links, nav */
+  --color-highlight-bg: var(--color-blue-sky);   /* highlighted areas */
+  --color-accent: var(--color-dark-yellow);      /* emphasis (bg/border only) */
+  --color-correct: var(--color-sage-green);      /* correct feedback (bg/border only) */
+  --color-wrong: var(--color-red-lips);          /* wrong + partial feedback (bg/border only) */
+  --color-bg: var(--color-white);                /* page background */
+  --color-border: var(--color-broken-white);     /* dividers, subtle backgrounds */
+  --color-placeholder: var(--color-broken-white);/* missing graphics */
+  --color-text: var(--color-black);              /* all text */
+
+  /* Fonts */
+  --font-heading: "Rubik", sans-serif;
+  --font-body: "Assistant", sans-serif;
+
+  /* Font sizes - mobile first */
+  --fs-h1: 2.5rem;      /* 40px */
+  --fs-h2: 1.75rem;     /* 28px */
+  --fs-h3: 1.25rem;     /* 20px */
+  --fs-body: 1rem;      /* 16px */
+  --fs-small: 0.875rem; /* 14px */
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+}
+
+/* Larger screens: bigger headings */
+@media only screen and (min-width: 992px) {
+  :root {
+    --fs-h1: 4.25rem;   /* 68px */
+    --fs-h2: 2rem;      /* 32px */
+  }
+}
+
+/* ==========================================================================
+   Layout tokens - added in stage 3 (fixed navbar + logo placeholder).
+   NOT yet in the design-tokens source document: add them there too.
+   ========================================================================== */
+:root {
+  --navbar-height: 4.25rem;  /* 68px - fixed navbar height, used as page offset */
+  --logo-width: 7.5rem;      /* 120px - logo placeholder */
+  --logo-height: 2.5rem;     /* 40px - logo placeholder */
+}
+
+/* ==========================================================================
+   Typography mapping (design-tokens-merhav.md)
+   Body text is set through Bootstrap's own CSS variables (rule 3).
+   ========================================================================== */
+:root {
+  --bs-body-font-family: var(--font-body);
+  --bs-body-font-size: var(--fs-body);
+  --bs-body-font-weight: var(--fw-semibold);
+}
+
+h1, .h1 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+}
+
+h2, .h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+}
+
+h3, .h3 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+}
+
+/* Small text: labels, notes, footer */
+small, .small {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+}
+
+/* ==========================================================================
+   Fixed navbar offset
+   ========================================================================== */
+.navbar {
+  min-height: var(--navbar-height);
+}
+
+/* Keep page content and anchor targets out from under the fixed navbar */
+html {
+  scroll-padding-top: var(--navbar-height);
+}
+
+body {
+  padding-top: var(--navbar-height);
+}
+
+/* Sticky elements stop below the fixed navbar instead of under it */
+.below-navbar {
+  top: var(--navbar-height);
+}
+
+/* ==========================================================================
+   Graphic placeholders (gray box with X, see design-tokens rule 8)
+   ========================================================================== */
+.graphic-placeholder {
+  background-color: var(--color-placeholder);
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+}
+
+.logo-placeholder {
+  width: var(--logo-width);
+  height: var(--logo-height);
+  font-size: var(--fs-body);
+}
