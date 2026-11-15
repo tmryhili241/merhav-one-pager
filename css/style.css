@@ -63,6 +63,8 @@
   --navbar-height: 4.25rem;  /* 68px - fixed navbar height, used as page offset */
   --logo-width: 7.5rem;      /* 120px - logo placeholder */
   --logo-height: 2.5rem;     /* 40px - logo placeholder */
+  --progress-bar-width: 0.5rem; /* 8px - vertical progress bar width */
+  --placeholder-min-height: 12rem; /* minimum height for full-height placeholders on mobile */
 }
 
 /* ==========================================================================
@@ -144,6 +146,10 @@ body {
   font-size: var(--fs-body);
 }
 
+.overview-placeholder {
+  min-height: var(--placeholder-min-height);
+}
+
 /* ==========================================================================
    Bootstrap overrides via CSS variables (Rule 3)
    ========================================================================== */
@@ -179,16 +185,39 @@ a {
 /* ==========================================================================
    Section 1 - Chain Diagram (Flowchart)
    ========================================================================== */
-.chain-step {
-  flex: 1 1 0;
+.chain-diagram {
+  max-width: 24rem;
+  padding: 0.5rem 0.5rem 0.5rem 2.25rem;
 }
 
 .chain-box {
-  border-color: var(--color-border);
+  border: 0.0625rem solid var(--color-border);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  padding: 0.625rem 1rem;
+  border-radius: 0.375rem;
 }
 
-.chain-step-num {
-  font-family: var(--font-heading);
+.chain-box-wrong {
+  border: 0.125rem dashed var(--color-wrong);
+}
+
+.chain-node-main {
+  width: 10.5rem;
+}
+
+.chain-node-sub {
+  width: 8.5rem;
+}
+
+.chain-v-stem {
+  width: 2rem;
+}
+
+.chain-v-line {
+  width: 0.125rem;
+  height: 2.25rem;
+  background-color: var(--color-primary);
 }
 
 .chain-arrow {
@@ -197,80 +226,59 @@ a {
   line-height: 1;
 }
 
-.chain-label {
-  background-color: var(--color-highlight-bg);
-  color: var(--color-text);
-  border-color: var(--color-border);
-  white-space: nowrap;
+.chain-h-arrow {
+  color: var(--color-primary);
+  font-size: var(--fs-h3);
+  line-height: 1;
+  padding: 0 0.5rem;
 }
 
-/* Return arrow (missing details) */
-.chain-return-flow {
-  color: var(--color-text);
+.chain-branch-side {
+  flex: 1 1 0;
 }
 
-@media (max-width: 991.98px) {
-  .chain-return-flow {
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-    border: 0.125rem dashed var(--color-wrong);
-    border-radius: 0.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-  }
-
-  .chain-return-arrow::before {
-    content: "↑";
-    color: var(--color-wrong);
-    font-weight: var(--fw-bold);
-    font-size: var(--fs-h3);
-    line-height: 1;
-  }
+.chain-branch-spacer {
+  flex: 1 1 0;
 }
 
-@media (min-width: 992px) {
-  .chain-list {
-    padding-bottom: 3.75rem;
-  }
+/* Dashed return path from 'חסרים פרטים?' up to 'מבקש' on the left side */
+.chain-return-v {
+  position: absolute;
+  left: 0.5rem;
+  top: 1.625rem;
+  bottom: 2rem;
+  border-left: 0.125rem dashed var(--color-wrong);
+}
 
-  .chain-return-flow {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 8%;
-    right: 8%;
-    height: 1.75rem;
-    border-bottom: 0.125rem dashed var(--color-wrong);
-    border-left: 0.125rem dashed var(--color-wrong);
-    border-right: 0.125rem dashed var(--color-wrong);
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.chain-return-bottom {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 2rem;
+  width: 1.75rem;
+  border-bottom: 0.125rem dashed var(--color-wrong);
+}
 
-  .chain-return-label {
-    background-color: var(--color-bg);
-    padding: 0 0.5rem;
-  }
+.chain-return-top {
+  position: absolute;
+  left: 0.5rem;
+  top: 1.625rem;
+  width: calc(50% - 4.5rem);
+  border-top: 0.125rem dashed var(--color-wrong);
+}
 
-  .chain-return-arrow {
-    position: absolute;
-    top: -0.5rem;
-    right: -0.375rem;
-    width: 0;
-    height: 0;
-    border-left: 0.375rem solid transparent;
-    border-right: 0.375rem solid transparent;
-    border-bottom: 0.5rem solid var(--color-wrong);
-  }
+.chain-return-head {
+  position: absolute;
+  top: -0.375rem;
+  right: -0.5rem;
+  width: 0;
+  height: 0;
+  border-top: 0.375rem solid transparent;
+  border-bottom: 0.375rem solid transparent;
+  border-left: 0.5rem solid var(--color-wrong);
 }
 
 /* ==========================================================================
-   Section 3 - Hotspot Buttons
+   Section 3 - Form Structure & Progress
    ========================================================================== */
 .hotspot-btn {
   width: 2.25rem;
@@ -281,4 +289,19 @@ a {
   justify-content: center;
   font-family: var(--font-heading);
   font-size: var(--fs-body);
+}
+
+.progress-vertical {
+  width: var(--progress-bar-width);
+  height: 16rem;
+  border-radius: var(--progress-bar-width);
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-vertical .progress-bar {
+  width: 100%;
+  height: 0%;
+  background-color: var(--color-primary);
+  transition: height 0.4s ease;
 }
