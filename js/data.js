@@ -1,3 +1,40 @@
 // All checkable data for the unit: answers, rules and feedback texts.
-// Texts will be copied word for word from docs/content-merhav.md (structure: docs/tech-merhav.md, part 4).
-const unitData = {};
+// Texts are copied word for word from docs/content-merhav.md.
+const unitData = {
+  questions: [
+    {
+      id: "q1",
+      type: "single", // radio
+      correct: ["no"],
+      options: [
+        { id: "yes", text: "כן." },
+        { id: "no", text: "לא." }
+      ],
+      feedback: {
+        empty: "יש לבחור תשובה.",
+        correct: "נכון. בבקשה חסרים פרטים, והיא עוד לא אושרה על ידי מנהל הסניף. בקשה כזו הייתה חוזרת אליכם להשלמה, וספירת 3 ימי העבודה הייתה מתחילה מחדש.",
+        wrong: "לא בדיוק. בדקו שוב כל שדה בטופס. בקשה עוברת לרכש רק כשכל השדות מלאים והיא מאושרת על ידי מנהל הסניף. בקשה חסרה חוזרת אליכם להשלמה, וספירת 3 ימי העבודה מתחילה מחדש."
+      }
+    },
+    {
+      id: "q2",
+      type: "multi", // checkbox
+      correct: ["need", "sku"],
+      options: [
+        { id: "role", text: "ממלאים את שם התפקיד" },
+        { id: "branch", text: "בוחרים את מספר הסניף מהרשימה" },
+        { id: "need", text: "מפרטים את הסבר הצורך לבקשה" },
+        { id: "itemName", text: "כותבים את שם הפריט כפי שמופיע בקטלוג" },
+        { id: "sku", text: "מאתרים את מק\"ט הפריט בקטלוג" },
+        { id: "quantity", text: "משלימים את הכמות" }
+      ],
+      feedback: {
+        empty: "יש לבחור לפחות תשובה אחת.",
+        correct: "נכון. \"צריך\" לא מסביר לאן ילך הציוד ולמה, ובלי מק\"ט הרכש לא יודע איזה לוח בדיוק להזמין. אחרי ההשלמה, הבקשה נשלחת לאישור מנהל הסניף וחוזרת אליכם. אתם מעבירים אותה לרכז הרכש, ורק אז הוא יכול להתחיל לטפל בה.",
+        partial: "כמעט. התשובות הנכונות שבחרתם מסומנות בירוק. בדקו שוב: אולי יש פרט חסר שלא סימנתם, או שסימנתם פרט שכבר מלא בטופס. רמז: הסתכלו על הסבר הצורך ועל פרטי הפריט.",
+        wrong: "לא בדיוק. הפרטים שבחרתם כבר מלאים בטופס. בדקו שוב: איזה שדה ריק, ואיזה שדה מלא אבל לא מסביר מספיק?"
+      }
+    }
+  ],
+  practiceForm: {} // Kept empty for stage 6b
+};

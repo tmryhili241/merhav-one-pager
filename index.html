@@ -377,50 +377,169 @@
         <!-- Locked initially until all 3 parts in Section 3 are opened; 'inert' removes it from keyboard focus and accessibility tree -->
         <section id="check" class="py-5 is-locked" aria-labelledby="check-heading" inert>
             <div class="container px-4">
+
                 <!-- Instruction: full-width row -->
                 <div class="row g-4 mb-4">
                     <div class="col-12">
                         <!-- tabindex="-1" enables programmatic focus after unlocking without breaking tab order -->
                         <h2 id="check-heading" tabindex="-1">בדיקת בקשה</h2>
-                        <div class="ratio ratio-21x9">
-                            <div class="graphic-placeholder d-flex align-items-center justify-content-center"
-                                 role="img" aria-label="שומר מקום: הנחיה למקטע בדיקת בקשה">
-                                <span aria-hidden="true">X</span>
-                            </div>
-                        </div>
+                        <p>לפניכם בקשת רכש שהוגשה לאישור. בדקו אותה וענו על שתי השאלות הבאות.</p>
                     </div>
                 </div>
+
+                <!-- Two columns: Noa's Form on the right (first in DOM for RTL / top on mobile) + Questions on the left -->
                 <div class="row g-4">
-                    <!-- Noa's partially filled form -->
-                    <div class="col-lg-6">
-                        <div class="ratio ratio-4x3">
-                            <div class="graphic-placeholder d-flex align-items-center justify-content-center"
-                                 role="img" aria-label="שומר מקום: הטופס של נועה לוי, מלא חלקית">
-                                <span aria-hidden="true">X</span>
-                            </div>
+
+                    <!-- Column 1: Noa's partially filled form (disabled, no red highlights or hints) -->
+                    <div class="col-12 col-lg-6">
+                        <div class="d-flex flex-column gap-4">
+
+                            <!-- Part 1: Requester Details -->
+                            <fieldset class="border rounded p-3 bg-white">
+                                <legend class="float-none w-auto px-1 fs-6 fw-bold m-0 mb-3">1. פרטי המבקש</legend>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="check-fullName" class="form-label">שם מלא</label>
+                                        <input type="text" class="form-control" id="check-fullName" value="נועה לוי" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="check-role" class="form-label">תפקיד</label>
+                                        <input type="text" class="form-control" id="check-role" value="רכזת הדרכה" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="check-branch" class="form-label">סניף</label>
+                                        <select class="form-select" id="check-branch" disabled>
+                                            <option disabled>בחרו סניף...</option>
+                                            <option value="חיפה" selected>חיפה</option>
+                                            <option value="אשדוד">אשדוד</option>
+                                            <option value="תל אביב">תל אביב</option>
+                                            <option value="ירושלים">ירושלים</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="check-requestDate" class="form-label">תאריך הבקשה</label>
+                                        <input type="date" class="form-control" id="check-requestDate" value="2026-11-11" disabled>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="check-need" class="form-label">הסבר הצורך</label>
+                                        <textarea class="form-control" id="check-need" rows="2" disabled>צריך</textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!-- Part 2: Item Details -->
+                            <fieldset class="border rounded p-3 bg-white">
+                                <legend class="float-none w-auto px-1 fs-6 fw-bold m-0 mb-3">2. פרטי הפריט</legend>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="check-itemName" class="form-label">שם הפריט</label>
+                                        <input type="text" class="form-control" id="check-itemName" value="לוח מחיק מגנטי לתלייה על קיר, 120×90 ס&quot;מ" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="check-sku" class="form-label">מק"ט</label>
+                                        <input type="text" class="form-control" id="check-sku" value="" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="check-quantity" class="form-label">כמות</label>
+                                        <input type="number" class="form-control" id="check-quantity" value="2" min="1" disabled>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!-- Part 3: Branch Manager Approval -->
+                            <fieldset class="border rounded p-3 bg-white">
+                                <legend class="float-none w-auto px-1 fs-6 fw-bold m-0 mb-3">3. אישור מנהל סניף</legend>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="check-approverName" class="form-label">שם המאשר</label>
+                                        <input type="text" class="form-control" id="check-approverName" value="" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="check-approvalDate" class="form-label">תאריך אישור</label>
+                                        <input type="date" class="form-control" id="check-approvalDate" value="" disabled>
+                                    </div>
+                                </div>
+                            </fieldset>
+
                         </div>
                     </div>
-                    <!-- Questions and feedback -->
-                    <div class="col-lg-6">
-                        <div class="ratio ratio-16x9 mb-4">
-                            <div class="graphic-placeholder d-flex align-items-center justify-content-center"
-                                 role="img" aria-label="שומר מקום: שאלה 1 ומשוב">
-                                <span aria-hidden="true">X</span>
-                            </div>
+
+                    <!-- Column 2: Questions and Feedback -->
+                    <div class="col-12 col-lg-6">
+
+                        <!-- Question 1: Single choice (radio) -->
+                        <div class="card p-3 p-lg-4 mb-4 border" id="card-q1">
+                            <form id="form-q1" onsubmit="return false;">
+                                <fieldset>
+                                    <legend class="fs-6 fw-bold mb-3">1. האם הבקשה מוכנה להעברה לרכש?</legend>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1-opt-yes" value="yes">
+                                        <label class="form-check-label" for="q1-opt-yes">כן.</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1-opt-no" value="no">
+                                        <label class="form-check-label" for="q1-opt-no">לא.</label>
+                                    </div>
+                                </fieldset>
+                                <button type="button" class="btn btn-primary px-4 mb-3 check-btn" data-question-id="q1">בדיקה</button>
+                                <!-- Feedback area: aria-live announces updates to screen readers -->
+                                <div class="feedback-area" id="feedback-q1" aria-live="polite"></div>
+                            </form>
                         </div>
-                        <div class="ratio ratio-16x9">
-                            <div class="graphic-placeholder d-flex align-items-center justify-content-center"
-                                 role="img" aria-label="שומר מקום: שאלה 2 ומשוב">
-                                <span aria-hidden="true">X</span>
-                            </div>
+
+                        <!-- Question 2: Multiple choice (checkbox) -->
+                        <!-- Initially hidden until Question 1 is answered; revealed progressively -->
+                        <div class="card p-3 p-lg-4 border" id="card-q2" hidden>
+                            <form id="form-q2" onsubmit="return false;">
+                                <fieldset>
+                                    <!-- tabindex="-1" enables programmatic focus when revealed to screen readers and keyboard users -->
+                                    <legend class="fs-6 fw-bold mb-1" id="q2-legend" tabindex="-1">2. איך תשלימו את הפרטים החסרים בטופס?</legend>
+                                    <p class="small text-body-secondary mb-3">(בחרו את כל התשובות הנכונות)</p>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="q2" id="q2-opt-role" value="role">
+                                        <label class="form-check-label" for="q2-opt-role">ממלאים את שם התפקיד</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="q2" id="q2-opt-branch" value="branch">
+                                        <label class="form-check-label" for="q2-opt-branch">בוחרים את מספר הסניף מהרשימה</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="q2" id="q2-opt-need" value="need">
+                                        <label class="form-check-label" for="q2-opt-need">מפרטים את הסבר הצורך לבקשה</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="q2" id="q2-opt-itemName" value="itemName">
+                                        <label class="form-check-label" for="q2-opt-itemName">כותבים את שם הפריט כפי שמופיע בקטלוג</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="q2" id="q2-opt-sku" value="sku">
+                                        <label class="form-check-label" for="q2-opt-sku">מאתרים את מק"ט הפריט בקטלוג</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" name="q2" id="q2-opt-quantity" value="quantity">
+                                        <label class="form-check-label" for="q2-opt-quantity">משלימים את הכמות</label>
+                                    </div>
+                                </fieldset>
+                                <button type="button" class="btn btn-primary px-4 mb-3 check-btn" data-question-id="q2">בדיקה</button>
+                                <!-- Feedback area: aria-live announces updates to screen readers -->
+                                <div class="feedback-area" id="feedback-q2" aria-live="polite"></div>
+                            </form>
                         </div>
+
+                        <!-- Continue to practice button at bottom of questions column; locked until both questions are checked -->
+                        <div class="mt-4">
+                            <p id="practice-continue-note" class="small text-body-secondary mb-2">אחרי שתענו על שתי השאלות, תוכלו להמשיך לתרגול.</p>
+                            <button type="button" class="btn btn-primary px-4" id="practice-continue-btn" disabled aria-describedby="practice-continue-note">להמשך לתרגול</button>
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </section>
 
         <!-- ===== Section 5: practice ===== -->
-        <!-- Locked initially until all 3 parts in Section 3 are opened; 'inert' removes it from keyboard focus and accessibility tree -->
+        <!-- Locked initially until questions in Section 4 are completed; 'inert' removes it from keyboard focus and accessibility tree -->
         <section id="practice" class="py-5 is-locked" aria-labelledby="practice-heading" inert>
             <div class="container px-4">
 
@@ -428,7 +547,8 @@
                 <div class="row g-4 mb-5">
                     <!-- Text + start button column -->
                     <div class="col-lg-6">
-                        <h2 id="practice-heading">עכשיו תורכם</h2>
+                        <!-- tabindex="-1" enables programmatic focus after unlocking without breaking tab order -->
+                        <h2 id="practice-heading" tabindex="-1">עכשיו תורכם</h2>
                         <div class="ratio ratio-16x9">
                             <div class="graphic-placeholder d-flex align-items-center justify-content-center"
                                  role="img" aria-label="שומר מקום: טקסט הפתיח לתרגול וכפתור התחלה">

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Design tokens - copied as-is from docs/design-tokens-merhav.md
+   Design tokens - version 2 (docs/design-tokens-merhav.md)
    ========================================================================== */
 :root {
   /* Kit colors - Neutral */
@@ -29,6 +29,15 @@
   --color-border: var(--color-broken-white);     /* dividers, subtle backgrounds */
   --color-placeholder: var(--color-broken-white);/* missing graphics */
   --color-text: var(--color-black);              /* all text */
+  --color-text-on-primary: var(--color-white);   /* text/icons on primary bg */
+  --color-input-border: var(--color-black);      /* form fields, 3:1 non-text contrast */
+
+  /* Role colors - decorative shapes only (never text, never state) */
+  --color-shape-1: var(--color-yellow-sun);
+  --color-shape-2: var(--color-ice-blue);
+  --color-shape-3: var(--color-sage-green);      /* hero + end screen only */
+  --color-shape-4: var(--color-red-lips);        /* hero + end screen only */
+  --color-shape-strong: var(--color-blue-sea);   /* doodles, dots */
 
   /* Fonts */
   --font-heading: "Rubik", sans-serif;
@@ -45,27 +54,69 @@
   --fw-regular: 400;
   --fw-semibold: 600;
   --fw-bold: 700;
+
+  /* Radius */
+  --radius-sm: 0.5rem;      /* 8px - inputs, choice tiles, small stat cards */
+  --radius-md: 0.8125rem;   /* 13px - cards, icon tiles */
+  --radius-lg: 1.25rem;     /* 20px - images, placeholders, panels */
+  --radius-pill: 50rem;     /* buttons, arches, D-shapes */
+  --radius-round: 50%;      /* circles, round icon buttons */
+
+  /* Shadows (softer than the kit's 0 4px 4px rgba(0,0,0,.25)) */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.15); /* one standout element */
+
+  /* Lines and outlines */
+  --border-width: 1px;
+  --accent-line-width: 4px;      /* card corner lines */
+  --accent-line-length: 35%;     /* of card width/height */
+  --outline-width: 2px;          /* hover + focus */
+  --outline-offset: 2px;
+  --outline-color: var(--color-primary);
+
+  /* Spacing - mobile first */
+  --space-section-y: 3rem;       /* 48px top/bottom of a section */
+  --space-heading-gap: 2rem;     /* section heading -> content */
+  --space-grid-gap: 1.5rem;      /* between cards */
+  --space-card-padding: 1.5rem;  /* inside cards */
+
+  /* Components */
+  --btn-min-height: 2.75rem;     /* 44px touch target */
+  --icon-tile-size: 2.75rem;     /* 44px */
+
+  /* Decorative shapes */
+  --shape-opacity: 0.35;         /* tinted circles behind images */
+  --shape-circle-size: 60%;      /* of image width */
+  --shape-circle-offset: -15%;   /* how far it sticks out of the corner */
+  --shape-dot-sm: 0.5rem;        /* 8px */
+  --shape-dot-md: 1rem;          /* 16px */
+  --shape-stroke: 3px;           /* doodles, heading underline */
+
+  /* Layout (values already in the code) */
+  --navbar-height: 4.25rem;          /* 68px - fixed navbar, page offset */
+  --logo-width: 7.5rem;              /* 120px - logo placeholder */
+  --logo-height: 2.5rem;             /* 40px - logo placeholder */
+  --progress-bar-width: 0.5rem;      /* 8px - vertical progress bar (section 3) */
+  --placeholder-min-height: 12rem;   /* placeholders on mobile */
+  --opacity-locked: 0.5;             /* locked sections 4-6 */
+
+  /* Bootstrap overrides */
+  --bs-border-radius: var(--radius-sm);
+  --bs-border-radius-lg: var(--radius-lg);
+  --bs-border-radius-pill: var(--radius-pill);
+  --bs-box-shadow: var(--shadow-card);
 }
 
-/* Larger screens: bigger headings */
+/* Larger screens: bigger headings and spacing */
 @media only screen and (min-width: 992px) {
   :root {
     --fs-h1: 4.25rem;   /* 68px */
     --fs-h2: 2rem;      /* 32px */
-  }
-}
 
-/* ==========================================================================
-   Layout tokens - added in stage 3 (fixed navbar + logo placeholder).
-   NOT yet in the design-tokens source document: add them there too.
-   ========================================================================== */
-:root {
-  --navbar-height: 4.25rem;  /* 68px - fixed navbar height, used as page offset */
-  --logo-width: 7.5rem;      /* 120px - logo placeholder */
-  --logo-height: 2.5rem;     /* 40px - logo placeholder */
-  --progress-bar-width: 0.5rem; /* 8px - vertical progress bar width */
-  --placeholder-min-height: 12rem; /* minimum height for full-height placeholders on mobile */
-  --opacity-locked: 0.5;     /* Opacity for locked sections (Sections 4-6) prior to completion */
+    --space-section-y: 6rem;      /* 96px */
+    --space-heading-gap: 3.5rem;  /* 56px */
+    --space-grid-gap: 2.25rem;    /* 36px */
+  }
 }
 
 /* ==========================================================================
@@ -333,4 +384,56 @@ a {
   pointer-events: none;
   user-select: none;
   transition: opacity 0.4s ease;
+}
+
+/* ==========================================================================
+   Section 4 - Evaluation Questions & Feedback (Rules 5, 7, 27)
+   ========================================================================== */
+
+/* Form controls contrast (Rule 27: >= 3:1 non-text contrast against white background) */
+.form-control,
+.form-select,
+.form-check-input {
+  border-color: var(--color-input-border);
+}
+
+/* Highlight correct options in partial feedback (Rule 7: green border, text remains black) */
+.form-check.choice-correct {
+  outline: var(--outline-width) solid var(--color-correct);
+  outline-offset: var(--outline-offset);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg);
+}
+
+/* Feedback alert container (Rules 5 & 7: colored border, text is always --color-text) */
+.feedback-alert {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: var(--outline-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-card-padding);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+}
+
+/* Correct feedback state: green border */
+.feedback-alert-correct {
+  border-color: var(--color-correct);
+}
+
+/* Partial and wrong feedback states: red border */
+.feedback-alert-partial,
+.feedback-alert-wrong {
+  border-color: var(--color-wrong);
+}
+
+/* Empty selection feedback state: neutral border */
+.feedback-alert-empty {
+  border-color: var(--color-border);
+}
+
+/* Ensure the standard HTML5 hidden attribute always hides elements regardless of display settings */
+[hidden] {
+  display: none !important;
 }
