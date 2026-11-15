@@ -200,11 +200,10 @@
                         <h2 id="form-heading">מבנה הטופס</h2>
                         <p>הטופס בנוי משלושה חלקים, וכל השדות בו חובה: פרטי מבקש, פרטי פריט, ואישור מנהל סניף.</p>
                         <p>על גבי הטופס מסומנים שלושת החלקים. לחצו על כל סימון כדי לראות אילו פרטים יש למלא באותו חלק ומה עושים אם חסר פרט.</p>
-                        <p>אחרי שתפתחו את שלושתם, תוכלו להמשיך לשלב הבא.</p>
                     </div>
                 </div>
-                <!-- Outer row: main column (first in HTML -> right in RTL) and progress column (second in HTML -> left in RTL) -->
-                <div class="row g-3 g-lg-4 align-items-start">
+                <!-- Outer row: main column and progress column. No align-items-start here so col-auto stretches to full height, enabling sticky-top to stick -->
+                <div class="row g-3 g-lg-4">
 
                     <!-- Main column -->
                     <div class="col">
@@ -348,9 +347,10 @@
                             </div>
                         </div>
 
-                        <!-- Continue button at bottom of main column -->
-                        <div class="d-flex justify-content-start mt-3">
-                            <button type="button" class="btn btn-primary px-4" disabled>להמשך</button>
+                        <!-- Continue button at bottom of main column; locked until all 3 form parts are viewed -->
+                        <div class="mt-4">
+                            <p id="continue-note" class="small text-body-secondary mb-2">אחרי שתפתחו את שלושתם, תוכלו להמשיך לשלב הבא.</p>
+                            <button type="button" class="btn btn-primary px-4" id="continue-btn" disabled aria-describedby="continue-note">להמשך</button>
                         </div>
 
                     </div>
@@ -359,10 +359,13 @@
                     <div class="col-auto">
                         <div class="sticky-top below-navbar py-2 d-flex flex-column align-items-center">
                             <div class="progress progress-vertical" role="progressbar"
+                                 id="form-structure-progress"
                                  aria-label="התקדמות: 0 מתוך 3 חלקים"
                                  aria-valuenow="0" aria-valuemin="0" aria-valuemax="3">
-                                <div class="progress-bar" style="height: 0%;"></div>
+                                <div class="progress-bar" id="form-structure-progress-bar" style="height: 0%;"></div>
                             </div>
+                            <!-- Live counter text below vertical bar; aria-hidden because progressbar announces aria-valuenow and aria-label -->
+                            <small class="fw-semibold text-body-secondary mt-1" id="form-structure-progress-text" aria-hidden="true">0/3</small>
                         </div>
                     </div>
 
@@ -371,12 +374,14 @@
         </section>
 
         <!-- ===== Section 4: check a request (2 questions) ===== -->
-        <section id="check" class="py-5" aria-labelledby="check-heading">
+        <!-- Locked initially until all 3 parts in Section 3 are opened; 'inert' removes it from keyboard focus and accessibility tree -->
+        <section id="check" class="py-5 is-locked" aria-labelledby="check-heading" inert>
             <div class="container px-4">
                 <!-- Instruction: full-width row -->
                 <div class="row g-4 mb-4">
                     <div class="col-12">
-                        <h2 id="check-heading">בדיקת בקשה</h2>
+                        <!-- tabindex="-1" enables programmatic focus after unlocking without breaking tab order -->
+                        <h2 id="check-heading" tabindex="-1">בדיקת בקשה</h2>
                         <div class="ratio ratio-21x9">
                             <div class="graphic-placeholder d-flex align-items-center justify-content-center"
                                  role="img" aria-label="שומר מקום: הנחיה למקטע בדיקת בקשה">
@@ -415,7 +420,8 @@
         </section>
 
         <!-- ===== Section 5: practice ===== -->
-        <section id="practice" class="py-5" aria-labelledby="practice-heading">
+        <!-- Locked initially until all 3 parts in Section 3 are opened; 'inert' removes it from keyboard focus and accessibility tree -->
+        <section id="practice" class="py-5 is-locked" aria-labelledby="practice-heading" inert>
             <div class="container px-4">
 
                 <!-- 5a: intro -->
@@ -492,7 +498,8 @@
         </section>
 
         <!-- ===== Section 6: finish ===== -->
-        <section id="finish" class="py-5" aria-labelledby="finish-heading">
+        <!-- Locked initially until all 3 parts in Section 3 are opened; 'inert' removes it from keyboard focus and accessibility tree -->
+        <section id="finish" class="py-5 is-locked" aria-labelledby="finish-heading" inert>
             <div class="container px-4">
                 <div class="row g-4">
                     <!-- Text column -->
